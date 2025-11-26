@@ -31,7 +31,7 @@
     "@angular/compiler": "14",
     "@angular/compiler-cli": "14",
     "@angular/core": "14",
-    "@capacitor/core": "1.0.0-beta.17",
+    "@capacitor/core": "^3.9.0",
     "@ngrx/effects": "14",
     "@ngrx/store": "14",
     "@types/es6-promise": "0.0.33",
@@ -58,10 +58,9 @@
   "peerDependencies": {
     "@angular/common": ">=6.0.0",
     "@angular/core": ">=6.0.0",
-    "@capacitor/core": "^1.0.0-beta.17",
+    "@capacitor/core": "^3.9.0",
     "@ngrx/effects": ">=6.0.0",
     "@ngrx/store": ">=6.0.0",
     "rxjs": ">=6.0.0"
-  },
-  "dependencies": {}
+  }
 }

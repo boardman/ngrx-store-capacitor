@@ -12,8 +12,8 @@ const STORAGE_KEY = 'NSIS_APP_STATE';
 
 function fetchState(): Promise<void | {}> {
   return Storage.get({ key: STORAGE_KEY })
-    .then(s => JSON.parse(s.value) || {})
-    .catch(err => {});
+    .then((s: any) => JSON.parse(s.value) || {})
+    .catch((err: any) => {});
 }
 
 function saveState(state: any, keys: string[]): Promise<void> {
