@@ -5,10 +5,10 @@ import { Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { of } from 'rxjs/internal/observable/of';
-import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map } from 'rxjs/operators';
 
 import { getNested, setNested } from './object.helper';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 const { Storage } = Plugins;
 const STORAGE_KEY = 'NSIS_APP_STATE';

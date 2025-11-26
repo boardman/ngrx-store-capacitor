@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  devtool: '#source-map',
+  devtool: 'eval-cheap-module-source-map',
 
   resolve: {
     extensions: ['.ts', '.js']
@@ -24,20 +24,21 @@ module.exports = {
   target: 'node',
 
   module: {
-    rules: [{
-      enforce: 'pre',
-      test: /\.ts$/,
-      loader: 'tslint-loader',
-      exclude: [helpers.root('node_modules')]
-    },
-    {
-      test: /\.ts$/,
-      loader: 'awesome-typescript-loader',
-      options: {
-        declaration: false
-      },
-      exclude: [/\.spec\.ts$/, helpers.root('node_modules')]
-    }]
+    rules: [
+        {
+            test: /\.tsx?$/,
+            use: [
+                {
+                    loader: 'ts-loader',
+                    options: {
+                        // set to true to speed up builds if you use a separate type-check step
+                        transpileOnly: false
+                    }
+                }
+            ],
+            exclude: /node_modules/
+        }
+    ]
   },
 
   plugins: [
