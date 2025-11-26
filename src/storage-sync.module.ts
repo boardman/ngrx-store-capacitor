@@ -1,14 +1,11 @@
 /* tslint:disable:no-shadowed-variable */
 import { ActionReducer } from '@ngrx/store';
-import { defer, Observable } from 'rxjs';
-import { Effect } from '@ngrx/effects';
+import { defer, of, from } from 'rxjs';
+import { createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
-
 import { getNested, setNested } from './object.helper';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 const { Storage } = Plugins;
 const STORAGE_KEY = 'NSIS_APP_STATE';
@@ -40,22 +37,41 @@ export const StorageSyncActions = {
 
 @Injectable()
 export class StorageSyncEffects {
-  @Effect() hydrate$: Observable<any> = defer(() =>
-    fromPromise(fetchState()).pipe(
-      map(state => ({
-        type: StorageSyncActions.HYDRATED,
-        payload: state,
-      })),
-      catchError(e => {
-        console.warn(`error fetching data from store for hydration: ${e}`);
+    // @Effect() hydrate$: Observable<any> = defer(() =>
+    //     from(fetchState()).pipe(
+    //         map(state => ({
+    //             type: StorageSyncActions.HYDRATED,
+    //             payload: state,
+    //         })),
+    //         catchError(e => {
+    //             console.warn(`error fetching data from store for hydration: ${e}`);
+    //
+    //             return of({
+    //                 type: StorageSyncActions.HYDRATED,
+    //                 payload: {},
+    //             });
+    //         })
+    //     )
+    // );
 
-        return of({
-          type: StorageSyncActions.HYDRATED,
-          payload: {},
-        });
-      })
-    )
-  );
+    hydrate$ = createEffect(() => {
+        return defer(() =>
+            from(fetchState()).pipe(
+                map(state => ({
+                    type: StorageSyncActions.HYDRATED,
+                    payload: state,
+                })),
+                catchError(e => {
+                    console.warn(`error fetching data from store for hydration: ${e}`);
+
+                    return of({
+                        type: StorageSyncActions.HYDRATED,
+                        payload: {},
+                    });
+                })
+            )
+        );
+    });
 }
 
 export interface StorageSyncOptions {
