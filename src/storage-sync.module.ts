@@ -3,11 +3,10 @@ import { ActionReducer } from '@ngrx/store';
 import { defer, of, from } from 'rxjs';
 import { createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { Plugins } from '@capacitor/core';
 import { catchError, map } from 'rxjs/operators';
 import { getNested, setNested } from './object.helper';
+import { Storage } from '@capacitor/storage';
 
-const { Storage } = Plugins;
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
 function fetchState(): Promise<void | {}> {
