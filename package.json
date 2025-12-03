@@ -41,7 +41,7 @@
     "loader-utils": "~1.1.0",
     "reflect-metadata": "~0.1.12",
     "rimraf": "2.6.3",
-    "rxjs": "7.5.0",
+    "rxjs": "^7.5.0",
     "source-map-loader": "~0.2.3",
     "ts-helpers": "~1.1.2",
     "ts-loader": "^9.5.4",
@@ -56,11 +56,11 @@
     "zone.js": "~0.8.26"
   },
   "peerDependencies": {
-    "@angular/common": ">=6.0.0",
-    "@angular/core": ">=6.0.0",
+    "@angular/common": "^14.3.0",
+    "@angular/core": "^14.3.0",
     "@capacitor/core": "^3.9.0",
-    "@ngrx/effects": ">=6.0.0",
-    "@ngrx/store": ">=6.0.0",
-    "rxjs": ">=6.0.0"
+    "@ngrx/effects": "^14.3.0",
+    "@ngrx/store": "^14.3.0",
+    "rxjs": "^7.5.0"
   }
 }
