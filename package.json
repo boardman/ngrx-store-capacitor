@@ -64,6 +64,6 @@
     "rxjs": "^7.5.0"
   },
   "dependencies": {
-    "@capacitor/storage": "1.2.5"
+    "@capacitor/preferences": "4"
   }
 }

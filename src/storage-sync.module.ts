@@ -5,12 +5,12 @@ import { createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { getNested, setNested } from './object.helper';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
 function fetchState(): Promise<void | {}> {
-  return Storage.get({ key: STORAGE_KEY })
+  return Preferences.get({ key: STORAGE_KEY })
     .then((s: any) => JSON.parse(s.value) || {})
     .catch((err: any) => {});
 }
@@ -27,7 +27,7 @@ function saveState(state: any, keys: string[]): Promise<void> {
     }, {});
   }
 
-  return Storage.set({ key: STORAGE_KEY, value: JSON.stringify(state) });
+  return Preferences.set({ key: STORAGE_KEY, value: JSON.stringify(state) });
 }
 
 export const StorageSyncActions = {
